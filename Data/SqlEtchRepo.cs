@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Etch.Models;
+using System;
 
 namespace Etch.Data
 {
@@ -13,9 +14,23 @@ namespace Etch.Data
             _context = context;
         }
 
+        public void CreateFlashcard(Flashcard flashcard)
+        {
+            if (flashcard == null)
+            {
+                throw new ArgumentNullException();
+            }
+            _context.Flashcards.Add(flashcard);
+        }
+
         public IEnumerable<Flashcard> GetAllFlashcards()
         {
             return _context.Flashcards.ToList();
+        }
+
+        public bool SaveChanges()
+        {
+            return _context.SaveChanges() >= 0;
         }
     }
 }

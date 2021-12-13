@@ -21,5 +21,18 @@ namespace Etch.Controllers
         {
             return Ok(_repo.GetAllFlashcards());
         }
+
+        // TODO: make restful by returning resource and route-to
+        [HttpPost]
+        public ActionResult CreateFlashcard(Flashcard flashcard)
+        {
+            if (flashcard == null)
+            {
+                return NotFound();
+            }
+            _repo.CreateFlashcard(flashcard);
+            _repo.SaveChanges();
+            return Ok();
+        }
     }
 }
