@@ -10,5 +10,6 @@ namespace Etch.Data
         public Flashcard GetFlashCardById(int id);
         public void CreateFlashcard(Flashcard flashcard);
         public Answer GetAnswerById(int id);
+        public void DeleteFlashcard(Flashcard flashcard);
     }
 }

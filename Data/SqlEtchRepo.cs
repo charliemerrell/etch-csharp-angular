@@ -23,6 +23,11 @@ namespace Etch.Data
             _context.Flashcards.Add(flashcard);
         }
 
+        public void DeleteFlashcard(Flashcard flashcard)
+        {
+            _context.Flashcards.Remove(flashcard);
+        }
+
         public IEnumerable<Flashcard> GetAllFlashcards()
         {
             return _context.Flashcards.ToList();

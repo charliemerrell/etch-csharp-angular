@@ -77,5 +77,18 @@ namespace Etch.Controllers
             var answerReadDTO = _mapper.Map<AnswerReadDTO>(answer);
             return CreatedAtRoute(nameof(GetAnswerById), new { flashcardId = id, answerId = answerReadDTO.Id }, answerReadDTO);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteFlashcardById(int id)
+        {
+            var flashcard = _repo.GetFlashCardById(id);
+            if (flashcard == null)
+            {
+                return NotFound();
+            }
+            _repo.DeleteFlashcard(flashcard);
+            _repo.SaveChanges();
+            return NoContent();
+        }
     }
 }
