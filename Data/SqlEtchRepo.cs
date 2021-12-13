@@ -28,6 +28,11 @@ namespace Etch.Data
             return _context.Flashcards.ToList();
         }
 
+        public Answer GetAnswerById(int id)
+        {
+            return _context.Answers.FirstOrDefault(answer => answer.Id == id);
+        }
+
         public Flashcard GetFlashCardById(int id)
         {
             return _context.Flashcards.FirstOrDefault(flashcard => flashcard.Id == id);

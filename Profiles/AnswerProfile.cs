@@ -9,6 +9,7 @@ namespace Etch.Profiles
         public AnswerProfile()
         {
             CreateMap<AnswerCreateDTO, Answer>();
+            CreateMap<Answer, AnswerReadDTO>();
         }
     }
 }

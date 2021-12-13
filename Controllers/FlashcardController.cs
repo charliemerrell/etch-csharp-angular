@@ -27,7 +27,7 @@ namespace Etch.Controllers
             return Ok(_mapper.Map<IEnumerable<FlashcardReadDTO>>(flashcards));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetFlashcardById")]
         public ActionResult<FlashcardReadDTO> GetFlashcardById(int id)
         {
             var flashcard = _repo.GetFlashCardById(id);
@@ -38,19 +38,33 @@ namespace Etch.Controllers
             return Ok(_mapper.Map<FlashcardReadDTO>(flashcard));
         }
 
-        // TODO: make restful by returning resource and route-to
         [HttpPost]
-        public ActionResult CreateFlashcard(FlashcardCreateDTO flashcardCreateDTO)
+        public ActionResult<FlashcardReadDTO> CreateFlashcard(FlashcardCreateDTO flashcardCreateDTO)
         {
             var flashcard = _mapper.Map<Flashcard>(flashcardCreateDTO);
             _repo.CreateFlashcard(flashcard);
             _repo.SaveChanges();
-            return Ok();
+            var flashcardReadDTO = _mapper.Map<FlashcardReadDTO>(flashcard);
+            return CreatedAtRoute(nameof(GetFlashcardById), new { Id = flashcardReadDTO.Id }, flashcardReadDTO);
         }
 
-        // TODO: make restful by returning resource and route-to
+        [HttpGet("{flashcardId}/answers/{answerId}", Name = "GetAnswerById")]
+        public ActionResult<AnswerReadDTO> GetAnswerById(int flashcardId, int answerId)
+        {
+            var answer = _repo.GetAnswerById(answerId);
+            if (answer == null)
+            {
+                return NotFound();
+            }
+            if (answer.FlashcardId != flashcardId)
+            {
+                return BadRequest(); // TODO find correct response code here
+            }
+            return Ok(_mapper.Map<AnswerReadDTO>(answer));
+        }
+
         [HttpPost("{id}/answers")]
-        public ActionResult CreateAnswerForFlashcard(int id, AnswerCreateDTO answerCreateDTO)
+        public ActionResult<AnswerReadDTO> CreateAnswerForFlashcard(int id, AnswerCreateDTO answerCreateDTO)
         {
             var flashcard = _repo.GetFlashCardById(id);
             if (flashcard == null)
@@ -60,7 +74,8 @@ namespace Etch.Controllers
             var answer = _mapper.Map<Answer>(answerCreateDTO);
             flashcard.Answers.Add(answer);
             _repo.SaveChanges();
-            return Ok();
+            var answerReadDTO = _mapper.Map<AnswerReadDTO>(answer);
+            return CreatedAtRoute(nameof(GetAnswerById), new { flashcardId = id, answerId = answerReadDTO.Id }, answerReadDTO);
         }
     }
 }

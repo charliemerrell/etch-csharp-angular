@@ -9,5 +9,6 @@ namespace Etch.Data
         public IEnumerable<Flashcard> GetAllFlashcards();
         public Flashcard GetFlashCardById(int id);
         public void CreateFlashcard(Flashcard flashcard);
+        public Answer GetAnswerById(int id);
     }
 }
