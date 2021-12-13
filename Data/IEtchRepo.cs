@@ -7,6 +7,7 @@ namespace Etch.Data
     {
         public bool SaveChanges();
         public IEnumerable<Flashcard> GetAllFlashcards();
+        public Flashcard GetFlashCardById(int id);
         public void CreateFlashcard(Flashcard flashcard);
     }
 }

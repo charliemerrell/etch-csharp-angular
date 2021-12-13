@@ -1,23 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Etch.Models;
 
-namespace Etch.Models
+namespace Etch.DTOs
 {
-    public class Flashcard
+    public class FlashcardCreateDTO
     {
-        public int Id { get; set; }
-
         [Required]
         public string Prompt { get; set; }
 
         [Required]
         public string CorrectAnswer { get; set; }
 
-        [Required]
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        [Required]
         public List<Answer> Answers { get; set; } = new();
     }
 }

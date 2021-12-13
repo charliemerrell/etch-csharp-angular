@@ -1,3 +1,4 @@
+using System;
 using Etch.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +25,7 @@ namespace Etch
             services.AddDbContext<EtchDbContext>();
             services.AddControllersWithViews();
             services.AddScoped<IEtchRepo, SqlEtchRepo>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
