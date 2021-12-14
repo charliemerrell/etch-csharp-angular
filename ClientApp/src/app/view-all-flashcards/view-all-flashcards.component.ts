@@ -3,11 +3,11 @@ import { FlashcardService } from '../flashcard.service';
 import { Flashcard } from '../models/flashcard';
 
 @Component({
-  selector: 'app-answer-flashcards',
-  templateUrl: './answer-flashcards.component.html',
-  styleUrls: ['./answer-flashcards.component.sass']
+  selector: 'app-view-all-flashcards',
+  templateUrl: './view-all-flashcards.component.html',
+  styleUrls: ['./view-all-flashcards.component.sass']
 })
-export class AnswerFlashcardsComponent implements OnInit {
+export class ViewAllFlashcardsComponent implements OnInit {
 
   flashcards!: Flashcard[];
 

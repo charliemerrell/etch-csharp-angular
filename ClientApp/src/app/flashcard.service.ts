@@ -9,9 +9,15 @@ import { map } from 'rxjs/operators';
 })
 export class FlashcardService {
 
+  baseUrl = "/api/flashcards";
+
   constructor(private httpClient: HttpClient) { }
 
   getAllFlashcards() {
-    return this.httpClient.get("/api/flashcards", { observe: 'body', responseType: 'text' }).pipe(map(Convert.toFlashcard));
+    return this.httpClient.get(this.baseUrl, { observe: 'body', responseType: 'text' }).pipe(map(Convert.toFlashcardArray));
+  }
+
+  createFlashcard(flashcard: Flashcard) {
+    return this.httpClient.post(this.baseUrl, flashcard);
   }
 }

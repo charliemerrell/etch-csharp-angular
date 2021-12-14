@@ -22,7 +22,11 @@ export class Convert {
         return JSON.stringify(uncast(value, u(a(r("Answer")), r("Answer"))), null, 2);
     }
 
-    public static toFlashcard(json: string): Flashcard[] | Flashcard {
+    public static toFlashcard(json: string): Flashcard {
+        return cast(JSON.parse(json), u(a(r("Flashcard")), r("Flashcard")));
+    }
+
+    public static toFlashcardArray(json: string): Flashcard[] {
         return cast(JSON.parse(json), u(a(r("Flashcard")), r("Flashcard")));
     }
 
