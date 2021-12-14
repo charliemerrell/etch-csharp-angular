@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { FlashcardService } from '../flashcard.service';
 
-@Injectable()
 @Component({
   selector: 'app-answer-flashcards',
   templateUrl: './answer-flashcards.component.html',
@@ -10,10 +8,10 @@ import { Injectable } from '@angular/core';
 })
 export class AnswerFlashcardsComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private flashcardService: FlashcardService) { }
 
   ngOnInit(): void {
-    this.httpClient.get("/api/flashcards").subscribe(console.log);
+    this.flashcardService.getAllFlashcards().subscribe(console.log);
   }
 
 }
