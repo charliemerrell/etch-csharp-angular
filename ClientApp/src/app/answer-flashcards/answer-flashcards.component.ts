@@ -11,7 +11,9 @@ export class AnswerFlashcardsComponent implements OnInit {
   constructor(private flashcardService: FlashcardService) { }
 
   ngOnInit(): void {
-    this.flashcardService.getAllFlashcards().subscribe(console.log);
+    this.flashcardService.getAllFlashcards().subscribe((result) => {
+      console.log(result);
+    });
   }
 
 }

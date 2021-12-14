@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Etch.Models;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace Etch.Data
 {
@@ -40,7 +41,7 @@ namespace Etch.Data
 
         public Flashcard GetFlashCardById(int id)
         {
-            return _context.Flashcards.FirstOrDefault(flashcard => flashcard.Id == id);
+            return _context.Flashcards.Include(flashcard => flashcard.Answers).FirstOrDefault(flashcard => flashcard.Id == id);
         }
 
         public bool SaveChanges()

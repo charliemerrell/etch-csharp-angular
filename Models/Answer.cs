@@ -14,9 +14,6 @@ namespace Etch.Models
         public bool IsCorrect { get; set; }
 
         [Required]
-        public Flashcard Flashcard { get; set; }
-
-        [Required]
         public int FlashcardId { get; set; }
     }
 }
