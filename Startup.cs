@@ -27,6 +27,7 @@ namespace Etch
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("AllowEverything", builder => builder.AllowAnyHeader().AllowAnyMethod()));
 
             services.AddControllers();
 
@@ -34,9 +35,6 @@ namespace Etch
             services.AddControllersWithViews();
             services.AddScoped<IEtchRepo, SqlEtchRepo>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-            services.AddCors(options => options.AddPolicy("AllowEverything", builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
-
 
             services.AddSwaggerGen(c =>
             {
@@ -47,8 +45,10 @@ namespace Etch
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
+                System.Console.WriteLine("Started in Developer Mode");
                 app.UseCors("AllowEverything");
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
