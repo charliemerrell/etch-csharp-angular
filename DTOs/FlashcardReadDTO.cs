@@ -14,7 +14,5 @@ namespace Etch.DTOs
         public string CorrectAnswer { get; set; }
 
         public DateTime CreatedAt { get; set; }
-
-        public List<Answer> Answers { get; set; } = new();
     }
 }

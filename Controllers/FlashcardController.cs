@@ -56,34 +56,17 @@ namespace Etch.Controllers
             return CreatedAtRoute(nameof(GetFlashcardById), new { Id = flashcardReadDTO.Id }, flashcardReadDTO);
         }
 
-        [HttpGet("{flashcardId}/answers/{answerId}", Name = "GetAnswerById")]
-        public ActionResult<AnswerReadDTO> GetAnswerById(int flashcardId, int answerId)
-        {
-            var answer = _repo.GetAnswerById(answerId);
-            if (answer == null)
-            {
-                return NotFound();
-            }
-            if (answer.FlashcardId != flashcardId)
-            {
-                return BadRequest(); // TODO find correct response code here
-            }
-            return Ok(_mapper.Map<AnswerReadDTO>(answer));
-        }
-
         [HttpPost("{id}/answers")]
-        public ActionResult<AnswerReadDTO> CreateAnswerForFlashcard(int id, AnswerCreateDTO answerCreateDTO)
+        public ActionResult CreateAnswerForFlashcard(int id, AnswerCreateDTO answerCreateDTO)
         {
             var flashcard = _repo.GetFlashCardById(id);
             if (flashcard == null)
             {
                 return NotFound();
             }
-            var answer = _mapper.Map<Answer>(answerCreateDTO);
-            flashcard.Answers.Add(answer);
+            _repo.AddAnswer(flashcard, answerCreateDTO.IsCorrect);
             _repo.SaveChanges();
-            var answerReadDTO = _mapper.Map<AnswerReadDTO>(answer);
-            return CreatedAtRoute(nameof(GetAnswerById), new { flashcardId = id, answerId = answerReadDTO.Id }, answerReadDTO);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

@@ -15,6 +15,18 @@ namespace Etch.Data
             _context = context;
         }
 
+        public void AddAnswer(Flashcard flashcard, bool isCorrect)
+        {
+            if (isCorrect)
+            {
+                flashcard.NewCorrectAnswer();
+            }
+            else
+            {
+                flashcard.NewIncorrectAnswer();
+            }
+        }
+
         public void CreateFlashcard(Flashcard flashcard)
         {
             if (flashcard == null)
@@ -34,19 +46,14 @@ namespace Etch.Data
             return _context.Flashcards.ToList();
         }
 
-        public Answer GetAnswerById(int id)
-        {
-            return _context.Answers.FirstOrDefault(answer => answer.Id == id);
-        }
-
         public Flashcard GetFlashCardById(int id)
         {
-            return _context.Flashcards.Include(flashcard => flashcard.Answers).FirstOrDefault(flashcard => flashcard.Id == id);
+            return _context.Flashcards.FirstOrDefault(flashcard => flashcard.Id == id);
         }
 
         public IEnumerable<Flashcard> GetRipeFlashcards()
         {
-            return _context.Flashcards.Include(flashcard => flashcard.Answers).ToList();
+            return _context.Flashcards.Where(flashcard => flashcard.RipeAfter < DateTime.Now).ToList();
         }
 
         public bool SaveChanges()

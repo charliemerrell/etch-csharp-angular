@@ -7,7 +7,6 @@ namespace Etch
     public class EtchDbContext : DbContext
     {
         public DbSet<Flashcard> Flashcards { get; set; }
-        public DbSet<Answer> Answers { get; set; }
 
         private readonly string _dbPath;
 

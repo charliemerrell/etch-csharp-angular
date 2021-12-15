@@ -7,7 +7,5 @@ namespace Etch.Models
     {
         [Required]
         public bool IsCorrect { get; set; }
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }
