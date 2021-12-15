@@ -23,7 +23,6 @@ export class CreateFlashcardComponent implements OnInit {
       prompt: this.prompt.value,
       correctAnswer: this.correctAnswer.value,
       createdAt: new Date(),
-      answers: []
     }
     this.flashcardService.createFlashcard(flashcard).subscribe(() => {
       this.prompt.setValue('');

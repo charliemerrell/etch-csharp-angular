@@ -15,7 +15,7 @@ export class AnswerFlashcardsComponent implements OnInit {
   constructor(private flashcardService: FlashcardService) { }
 
   ngOnInit(): void {
-    this.flashcardService.getAllFlashcards().subscribe((flashcardArr) => {
+    this.flashcardService.getRipeFlashcards().subscribe((flashcardArr) => {
       this.flashcards = flashcardArr;
     });
   }

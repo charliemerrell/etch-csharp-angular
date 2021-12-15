@@ -8,9 +8,9 @@ namespace Etch.Data
         bool SaveChanges();
         IEnumerable<Flashcard> GetAllFlashcards();
         Flashcard GetFlashCardById(int id);
+        IEnumerable<Flashcard> GetRipeFlashcards();
         void CreateFlashcard(Flashcard flashcard);
         void DeleteFlashcard(Flashcard flashcard);
-        IEnumerable<Flashcard> GetRipeFlashcards();
         void AddAnswer(Flashcard flashcard, bool isCorrect);
     }
 }
