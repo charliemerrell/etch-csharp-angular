@@ -21,9 +21,17 @@ namespace Etch.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<FlashcardReadDTO>> GetAllFlashcards()
+        public ActionResult<List<FlashcardReadDTO>> GetAllFlashcards(string ripe)
         {
-            var flashcards = _repo.GetAllFlashcards();
+            IEnumerable<Flashcard> flashcards;
+            if (ripe == "true")
+            {
+                flashcards = _repo.GetRipeFlashcards();
+            }
+            else
+            {
+                flashcards = _repo.GetAllFlashcards();
+            }
             return Ok(_mapper.Map<IEnumerable<FlashcardReadDTO>>(flashcards));
         }
 

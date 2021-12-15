@@ -5,11 +5,12 @@ namespace Etch.Data
 {
     public interface IEtchRepo
     {
-        public bool SaveChanges();
-        public IEnumerable<Flashcard> GetAllFlashcards();
-        public Flashcard GetFlashCardById(int id);
-        public void CreateFlashcard(Flashcard flashcard);
-        public Answer GetAnswerById(int id);
-        public void DeleteFlashcard(Flashcard flashcard);
+        bool SaveChanges();
+        IEnumerable<Flashcard> GetAllFlashcards();
+        Flashcard GetFlashCardById(int id);
+        void CreateFlashcard(Flashcard flashcard);
+        Answer GetAnswerById(int id);
+        void DeleteFlashcard(Flashcard flashcard);
+        IEnumerable<Flashcard> GetRipeFlashcards();
     }
 }

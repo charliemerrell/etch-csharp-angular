@@ -10,6 +10,7 @@ import { Flashcard } from '../models/flashcard';
 export class AnswerFlashcardsComponent implements OnInit {
 
   flashcards!: Flashcard[];
+  showingAnswer: boolean = false;
 
   constructor(private flashcardService: FlashcardService) { }
 
@@ -17,6 +18,19 @@ export class AnswerFlashcardsComponent implements OnInit {
     this.flashcardService.getAllFlashcards().subscribe((flashcardArr) => {
       this.flashcards = flashcardArr;
     });
+  }
+
+  showAnswer() {
+    this.showingAnswer = true;
+  }
+
+  markAnswer(correct: boolean) {
+    this.flashcardService.markFlashcard(this.flashcards[0].id as number, correct).subscribe(() => this.nextFlashcard())
+  }
+
+  nextFlashcard() {
+    this.showingAnswer = false;
+    this.flashcards.splice(0, 1);
   }
 
 }

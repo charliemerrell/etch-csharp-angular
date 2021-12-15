@@ -44,6 +44,11 @@ namespace Etch.Data
             return _context.Flashcards.Include(flashcard => flashcard.Answers).FirstOrDefault(flashcard => flashcard.Id == id);
         }
 
+        public IEnumerable<Flashcard> GetRipeFlashcards()
+        {
+            return _context.Flashcards.Include(flashcard => flashcard.Answers).ToList();
+        }
+
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;

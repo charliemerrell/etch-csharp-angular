@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Flashcard } from './models/flashcard';
 import { Convert } from './models/convert';
 import { map } from 'rxjs/operators';
+import { Answer } from './models/answer';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,14 @@ export class FlashcardService {
 
   createFlashcard(flashcard: Flashcard) {
     return this.httpClient.post(this.baseUrl, flashcard);
+  }
+
+  markFlashcard(flashcardId: number, correct: boolean) {
+    let answer: Answer = {
+      isCorrect: correct,
+      createdAt: new Date(),
+      flashcardId
+    }
+    return this.httpClient.post(`${this.baseUrl}/${flashcardId}/answers`, answer);
   }
 }

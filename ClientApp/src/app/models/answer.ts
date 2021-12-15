@@ -1,5 +1,5 @@
 export interface Answer {
-    id: number;
+    id?: number;
     createdAt: Date;
     isCorrect: boolean;
     flashcardId: number;

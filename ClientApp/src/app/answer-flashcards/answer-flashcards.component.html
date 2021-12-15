@@ -1,1 +1,17 @@
-<div>answer flashcards works</div>
+<h2>Answer Flashcards</h2>
+<div *ngIf="flashcards">
+    <div *ngIf="flashcards.length > 0; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <p>{{flashcards.length}} flashcards left</p>
+        <div>
+            <p>{{flashcards[0].prompt}}</p>
+            <p [hidden]="!showingAnswer">{{flashcards[0].correctAnswer}}</p>
+            <button [disabled]="showingAnswer" (click)="showAnswer()">Show Answer</button>
+            <div [hidden]="!showingAnswer">
+                <button (click)="markAnswer(true)">Correct</button>
+                <button (click)="markAnswer(false)">Incorrect</button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #elseBlock>You have no flashcards ready</ng-template>
+</div>
